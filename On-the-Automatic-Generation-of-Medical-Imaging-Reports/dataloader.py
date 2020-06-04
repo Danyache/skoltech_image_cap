@@ -9,7 +9,10 @@ import os, re
 import nltk
 from collections import Counter
 # from build_vocab import Vocabulary, build_vocab
+from pathlib import Path
 
+curr_path = Path(os.getcwd())
+NLMCXR_path = os.path.join(str(curr_path.parent), 'NLMCXR_data')
 
 import torch
 import pandas as pd
@@ -85,7 +88,7 @@ def build_vocab(captions, threshold):
         vocab.add_word(word)
     return vocab
 
-asd = pd.read_pickle('/home/dchesakov/NLMCXR_data/all_reports_df.pkl')
+asd = pd.read_pickle(f'{NLMCXR_path}/all_reports_df.pkl')
 # vocab = build_vocab(asd.processed_captions.values, 8)
 asd = asd[ asd['processed_findings'].notnull() ]
 vocab = build_vocab(asd.processed_findings.values, 8)
@@ -112,7 +115,7 @@ class iuxray(Dataset):
         # self.image_path = image_path
         
         # tsv_file = os.path.join(self.root_dir, self.tsv_path)
-        self.asd = pd.read_pickle('/home/dchesakov/NLMCXR_data/all_reports_df.pkl')
+        self.asd = pd.read_pickle(f'{NLMCXR_path}/all_reports_df.pkl')
         self.asd = self.asd[ self.asd['processed_findings'].notnull() ]
         # self.captions = create_captions(tsv_file)
         self.captions_dict = {}
@@ -135,7 +138,7 @@ class iuxray(Dataset):
         # print(idx)
 
         img_name = self.all_imgs[idx] + '.png'
-        image = Image.open(f'/home/dchesakov/ImageCapProject/NLMCXR_png/{img_name}')
+        image = Image.open(f'{NLMCXR_path}/images/{img_name}')
 
         # img_name = os.path.join(self.root_dir, self.image_path, self.data_file.iloc[idx, 0])
         # image = Image.open(img_name)
