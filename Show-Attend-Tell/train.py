@@ -1,6 +1,6 @@
 import os
 os.environ["CUDA_DEVICE_ORDER"]="PCI_BUS_ID"
-os.environ["CUDA_VISIBLE_DEVICES"]="3"
+os.environ["CUDA_VISIBLE_DEVICES"]="2"
 import time
 import torch.backends.cudnn as cudnn
 import torch.optim
@@ -14,11 +14,18 @@ from utils import *
 from nltk.translate.bleu_score import corpus_bleu
 from score import evalscores
 from transformers import GPT2Tokenizer, GPT2LMHeadModel
+from pathlib import Path
 
-tokenizer = GPT2Tokenizer.from_pretrained('/home/dchesakov/transformers/output3')
-model = GPT2LMHeadModel.from_pretrained('/home/dchesakov/transformers/output3', pad_token_id=tokenizer.eos_token_id)
+curr_path = Path(os.getcwd())
+
+NLMCXR_path = os.path.join(str(curr_path.parent), 'NLMCXR_data')
+
+print(NLMCXR_path)
+
+tokenizer = GPT2Tokenizer.from_pretrained(f'{NLMCXR_path}/output3')
+model = GPT2LMHeadModel.from_pretrained(f'{NLMCXR_path}/output3', pad_token_id=tokenizer.eos_token_id)
 # Data parameters
-data_folder = '/home/dchesakov/NLMCXR_data'  # folder with data files saved by create_input_files.py
+data_folder = NLMCXR_path  # folder with data files saved by create_input_files.py
 
 version = '10'
 n_min = 6
@@ -40,7 +47,7 @@ cudnn.benchmark = True  # set to true only if inputs to model are fixed size; ot
 
 # Training parameters
 start_epoch = 0
-epochs =  25  # number of epochs to train for (if early stopping is not triggered)
+epochs =  2  # number of epochs to train for (if early stopping is not triggered)
 epochs_since_improvement = 0  # keeps track of number of epochs since there's been an improvement in validation BLEU
 batch_size = 32
 workers = 1  # for data-loading; right now, only 1 works with h5py

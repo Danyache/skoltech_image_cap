@@ -1,18 +1,24 @@
 import os
 os.environ["CUDA_DEVICE_ORDER"]="PCI_BUS_ID"
-os.environ["CUDA_VISIBLE_DEVICES"]="3"
+os.environ["CUDA_VISIBLE_DEVICES"]="2"
 import torch
 from torch import nn
 import torchvision
 from transformers import GPT2Tokenizer, GPT2LMHeadModel
 
 import torch.nn.functional as F
+from pathlib import Path
 
 from collections import OrderedDict
 
+curr_path = Path(os.getcwd())
+
+NLMCXR_path = os.path.join(str(curr_path.parent), 'NLMCXR_data')
+
+
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-embeddings_glove = torch.load("/home/dchesakov/NNLP/embeddings_glove_v300.pt")
+embeddings_glove = torch.load(f"{NLMCXR_path}/embeds/embeddings_glove_v10.pt")
 
 MODEL = "DENSE" # "resnet" #
 
@@ -57,8 +63,8 @@ class CrossGPTLayer(nn.Module):
         self.cross = nn.Linear(self.voc_len * 2, 1024)
         self.cross2 = nn.Linear(1024, self.voc_len)
         
-        self.tokenizer = GPT2Tokenizer.from_pretrained('/home/dchesakov/transformers/output3')
-        self.model = GPT2LMHeadModel.from_pretrained('/home/dchesakov/transformers/output3', pad_token_id=self.tokenizer.eos_token_id).to(device)
+        self.tokenizer = GPT2Tokenizer.from_pretrained(f'{NLMCXR_path}/output3')
+        self.model = GPT2LMHeadModel.from_pretrained(f'{NLMCXR_path}/output3', pad_token_id=self.tokenizer.eos_token_id).to(device)
         
          
         
