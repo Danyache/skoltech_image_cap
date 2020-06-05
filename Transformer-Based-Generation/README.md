@@ -5,7 +5,7 @@ This projects extends [pytorch/fairseq](https://github.com/pytorch/fairseq) and 
 # Requirements
 All the dependencies and requirements can be found here https://github.com/krasserm/fairseq-image-captioning in the **Setup** part. You should use `environment.yml` for the environment creation.
 
-# DataSet
+# Data
 
 You should change the `mysplit_test_images.txt`, `mysplit_train_images.txt`, `mysplit_valid_images.txt` files using the paths to the **train**, **test** and **validation** images. Images are the same. 
 
