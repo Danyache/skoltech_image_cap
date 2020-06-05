@@ -36,5 +36,6 @@ For the model evaluation you should firstly predict with the command:
 `
 python generate.py   --user-dir task   --features grid   --tokenizer moses   --bpe subword_nmt   --bpe-codes output_cxr/codes.txt   --beam 5   --split test   --path .checkpoints_cxr_final_s/checkpoint_best.pt   --input output_cxr/test-ids.txt   --output output_cxr/test-predictions-2805.json
 `
+
 Then you should use `TransformerBasedEvaluation.ipynb` file for the models evaluation. 
 
