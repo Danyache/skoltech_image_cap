@@ -1,17 +1,36 @@
+# Requirements
+## Specification of dependencies
+- [PyTorch](https://pytorch.org/) (An open source deep learning platform) 
+
+All the requirements are in file `req.txt`.
+
+Also you can use the environment in the DGX server in `/home/dchesakov/anaconda3`
+
+# Data
+The dataset is provided in `skoltech_image_cap/NLMCXR_data/images`
+
+To create data you should use `Создание датасета для обучения Show-Attend-Tell.ipynb`. There are two different parts to create dataset for the refular training and cross-GPT-2 training. 
+
 # Training
 
-Для начала надо создать файлы для обучения (чтобы это сделать нужно использовать ноутбук для создания файлов)
+First of all you should create folder `skoltech_image_cap/NLMCXR_data/embeds` and download file `glove.6B.300d.txt` there from https://www.kaggle.com/thanakomsn/glove6b300dtxt
 
-Чтобы **тренировать модель с нуля**, просто напишите –
+Also create folder `skoltech_image_cap/NLMCXR_data/output3` for pretrained GPT-2 models. They are also on DGX server in `/home/dchesakov/transformers/output3`.
+
+To train the model **from scratch** just use the command:
 
 `python train.py`
 
-Чтобы **продолжить тренировку с чекпоинта**, надо указать `checkpoint` параметр в начале кода
+To continue the training from a **checkpoint** just use the `checkpoint` param in the code.
 
-Если используете embeddings -- не забудьте файле тренировки поменять размер эмбеддингов
+If you use embeddings -- don't forget to change the size of embeddings in `train.py`
 
-Если вы используете GPT-2 в процесссе обучения -- поставьте True для параметра GPT_also. Также не забудьте установить параметры `version` и `n_min`, которые вы использовали при создании датасета. 
+If you use GPT-2 cross training -- choose `True` for the param `GPT_also`. Also dont forget `version` and `n_min` args, which you used for the dataset creation.
 
-Чтобы получить результаты метрик воспользуйтесь файлами 
-`bleu_predict.ipynb` или `bleu_predict_with_gpt.ipynb`
+# Evaluation 
+
+To get the metric results use the files 
+`bleu_predict.ipynb` (for vanilla SAT implementation and SAT+GPT) or `bleu_predict_with_gpt.ipynb` for cross-GPT model prediction. 
+
+
 
