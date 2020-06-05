@@ -18,6 +18,12 @@ import torch.backends.cudnn as cudnn
 import torchvision.transforms as transforms
 from torch.utils.data import DataLoader
 # from sklearn.metrics import roc_auc_score
+from pathlib import Path
+curr_path = Path(os.getcwd())
+
+splits_path = os.path.join(str(curr_path.parent), 'Transformer-Based-Generation/splits')
+output_path = os.path.join(str(curr_path.parent), 'Transformer-Based-Generation/output_cxr')
+print(splits_path, output_path)
 
 import torchvision
 import os
@@ -51,7 +57,7 @@ class DenseNet121(nn.Module):
 good_layers = ["densenet121.features.conv0.weight", "densenet121.features.norm0.weight", "densenet121.features.norm0.bias", "densenet121.features.norm0.running_mean", "densenet121.features.norm0.running_var", "densenet121.features.transition1.norm.weight", "densenet121.features.transition1.norm.bias", "densenet121.features.transition1.norm.running_mean", "densenet121.features.transition1.norm.running_var", "densenet121.features.transition1.conv.weight", "densenet121.features.transition2.norm.weight", "densenet121.features.transition2.norm.bias", "densenet121.features.transition2.norm.running_mean", "densenet121.features.transition2.norm.running_var", "densenet121.features.transition2.conv.weight", "densenet121.features.transition3.norm.weight", "densenet121.features.transition3.norm.bias", "densenet121.features.transition3.norm.running_mean", "densenet121.features.transition3.norm.running_var", "densenet121.features.transition3.conv.weight", "densenet121.features.norm5.weight", "densenet121.features.norm5.bias", "densenet121.features.norm5.running_mean", "densenet121.features.norm5.running_var", "densenet121.classifier.0.weight", "densenet121.classifier.0.bias"]
 
 def split_file(split):
-    return os.path.join('/home/dchesakov/fairseq-image-captioning/splits', f'mysplit_{split}_images.txt')
+    return os.path.join(splits_path, f'mysplit_{split}_images.txt')
 
 
 def read_split_image_ids_and_paths(split):
@@ -81,7 +87,7 @@ def main(args):
     image_paths = np.array(image_paths)
     
     image_paths = [image_path for image_path in image_paths]
-    features_dir = os.path.join('/home/dchesakov/fairseq-image-captioning/output_cxr', f'{args.split}-features-grid')
+    features_dir = os.path.join(output_path, f'{args.split}-features-grid')
 
     os.makedirs(features_dir, exist_ok=True)
 

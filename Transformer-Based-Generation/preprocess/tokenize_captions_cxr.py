@@ -9,10 +9,14 @@ import numpy as np
 import re
 
 from sacremoses import MosesTokenizer
+from pathlib import Path
+curr_path = Path(os.getcwd())
 
+cxrdata_path = os.path.join(str(curr_path.parent), 'Transformer-Based-Generation/cxr-data')
+splits_path = os.path.join(str(curr_path.parent), 'Transformer-Based-Generation/splits')
 
 def load_annotations(coco_dir):
-    with open("/home/dchesakov/fairseq-image-captioning/cxr-data/annotations/annotations.txt", "rb") as fp:
+    with open(f"{cxrdata_path}/annotations/annotations.txt", "rb") as fp:
         annotations = pickle.load(fp)
     return annotations
 
@@ -61,7 +65,7 @@ def write_image_ids(image_ids, filename):
             f.write(f'{image_id}\n')
 
 def split_file(split):
-    return os.path.join('/home/dchesakov/fairseq-image-captioning/splits', f'mysplit_{split}_images.txt')
+    return os.path.join(splits_path, f'mysplit_{split}_images.txt')
 
 
 def read_split_image_ids_and_paths(split):
