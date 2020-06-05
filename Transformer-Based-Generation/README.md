@@ -39,3 +39,7 @@ python generate.py   --user-dir task   --features grid   --tokenizer moses   --b
 
 Then you should use `TransformerBasedEvaluation.ipynb` file for the models evaluation. 
 
+# Hyperparameters
+
+All the hyperparams should be choosen during the training. The best params are the same for simplistic and full architecture. They are provided via the training command (and `encoder-layers` = 3 is used for the full architecture).
+But a wide range of hyperparams (`dropout`, `decoder-layers`, `encoder-layers`, `encoder-embed-dim`) were used.
