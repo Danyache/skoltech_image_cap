@@ -32,5 +32,8 @@ If you use GPT-2 cross training -- choose `True` for the param `GPT_also`. Also 
 To get the metric results use the files 
 `bleu_predict.ipynb` (for vanilla SAT implementation and SAT+GPT) or `bleu_predict_with_gpt.ipynb` for cross-GPT model prediction. 
 
+# Hyperparameters
 
+All the hyperparams should be choosen in the `train.py` file. 
+The best training was with `epochs` = 20 and params that are stated in the file for now. But a wide range of hyperparams (`dropout`, `attention_dim`, `decoder_dim`, learning rates) were used.
 
