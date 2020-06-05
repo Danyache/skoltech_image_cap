@@ -1,6 +1,0 @@
-name: envsat
-channels:
-  - defaults
-  - conda-forge
-prefix: /home/dchesakov/miniconda3/envs/envsat
-
