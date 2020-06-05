@@ -5,4 +5,4 @@ Requirements and Dataset are the same as in the `Show-Attend-Tell` directory
 
 For the training and evaluation just use the file `ModelTrainingAndEvaluating.ipynb`
 
-based on the  (github)[https://github.com/dakshitagrawal97/On-the-Automatic-Generation-of-Medical-Imaging-Reports]
+based on the  [github](https://github.com/dakshitagrawal97/On-the-Automatic-Generation-of-Medical-Imaging-Reports)
